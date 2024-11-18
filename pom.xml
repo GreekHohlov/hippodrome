@@ -13,51 +13,68 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.1.6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.2</version>
+            <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.12.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.12.0</version>
             <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>5.2.0</version>
-            <scope>test</scope>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.logging.log4j</groupId>-->
-<!--            <artifactId>log4j-api</artifactId>-->
-<!--            <version>2.17.2</version>-->
-<!--        </dependency>-->
-<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--&lt;!&ndash;            <groupId>org.apache.logging.log4j</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;            <artifactId>log4j-core</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;            <version>2.17.2</version>&ndash;&gt;-->
-<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.logging.log4j</groupId>-->
-<!--            <artifactId>log4j-slf4j-impl</artifactId>-->
-<!--            <version>2.17.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <goals>
+                    <test/>
+                </goals>
+                <configuration>
+                    <argLine>
+                        -XX:+EnableDynamicAgentLoading
+                        -Xshare:off
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
